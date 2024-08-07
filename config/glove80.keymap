@@ -133,7 +133,7 @@
         sr_rh_1: sr_rh_1 {
             compatible = "zmk,behavior-mod-morph";
             label = "SYMBOL_ROW_RH_1";
-            bindings = <&kp N6>, <&kp LS(N7)>;
+            bindings = <&kp N6>, <&kp RS(N7)>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -142,7 +142,7 @@
         sr_rh_2: sr_rh_2 {
             compatible = "zmk,behavior-mod-morph";
             label = "SYMBOL_ROW_RH_2";
-            bindings = <&kp N7>, <&kp LS(N0)>;
+            bindings = <&kp N7>, <&kp RS(N0)>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -160,7 +160,7 @@
         sr_rh_4: sr_rh_4 {
             compatible = "zmk,behavior-mod-morph";
             label = "SYMBOL_ROW_RH_4";
-            bindings = <&kp N9>, <&kp LS(RIGHT_BRACKET)>;
+            bindings = <&kp N9>, <&kp RS(RIGHT_BRACKET)>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -169,7 +169,7 @@
         sr_rh_5: sr_rh_5 {
             compatible = "zmk,behavior-mod-morph";
             label = "SYMBOL_ROW_RH_5";
-            bindings = <&kp N0>, <&kp LS(N8)>;
+            bindings = <&kp N0>, <&kp RS(N8)>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
