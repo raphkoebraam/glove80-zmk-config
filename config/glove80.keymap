@@ -39,6 +39,165 @@
             tapping-term-ms = <200>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
+
+        hmr: home_row_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOME_ROW_MODS_RIGHT";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            tapping-term-ms = <280>;
+            quick-tap-ms = <150>;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <>;
+            flavor = "balanced";
+        };
+
+        hml: home_row_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOME_ROW_MODS_LEFT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <150>;
+            flavor = "balanced";
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <>;
+        };
+
+        sr_lh_1: sr_lh_1 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_LH_1";
+            bindings = <&kp LS(EQUAL)>, <&kp LS(TILDE)>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_lh_2: sr_lh_2 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_LH_2";
+            bindings = <&kp LS(N1)>, <&kp N1>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_lh_3: sr_lh_3 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_LH_3";
+            bindings = <&kp LS(LEFT_BRACKET)>, <&kp N2>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_lh_4: sr_lh_4 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_LH_4";
+            bindings = <&kp LEFT_BRACKET>, <&kp N3>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_lh_5: sr_lh_5 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_LH_5";
+            bindings = <&kp LS(N9)>, <&kp N4>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_lh_6: sr_lh_6 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_LH_6";
+            bindings = <&kp EQUAL>, <&kp N5>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_rh_1: sr_rh_1 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_RH_1";
+            bindings = <&kp LS(N7)>, <&kp N6>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_rh_2: sr_rh_2 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_RH_2";
+            bindings = <&kp LS(N0)>, <&kp N7>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_rh_3: sr_rh_3 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_RH_3";
+            bindings = <&kp RIGHT_BRACKET>, <&kp N8>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_rh_4: sr_rh_4 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_RH_4";
+            bindings = <&kp LS(RIGHT_BRACKET)>, <&kp N9>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        sr_rh_5: sr_rh_5 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYMBOL_ROW_RH_5";
+            bindings = <&kp LS(N8)>, <&kp N0>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };    
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_copy {
+            bindings = <&kp LG(C)>;
+            key-positions = <48 49>;
+        };
+
+        combo_paste {
+            bindings = <&kp LG(V)>;
+            key-positions = <49 50>;
+        };
+
+        combo_cut {
+            bindings = <&kp LG(X)>;
+            key-positions = <47 48>;
+        };
+
+        combo_caps_word {
+            bindings = <&caps_word>;
+            key-positions = <38 41>;
+        };
+
+        combo_select_all {
+            bindings = <&kp LG(A)>;
+            key-positions = <50 47>;
+        };
+
+        combo_undo {
+            bindings = <&kp LG(Z)>;
+            key-positions = <50 48>;
+        };
     };
 
     macros {
