@@ -170,6 +170,11 @@
     combos {
         compatible = "zmk,combos";
 
+        combo_caps_word {
+            bindings = <&caps_word>;
+            key-positions = <38 41>;
+        };
+
         combo_copy {
             bindings = <&kp LG(C)>;
             key-positions = <48 49>;
@@ -185,11 +190,6 @@
             key-positions = <47 48>;
         };
 
-        combo_caps_word {
-            bindings = <&caps_word>;
-            key-positions = <38 41>;
-        };
-
         combo_select_all {
             bindings = <&kp LG(A)>;
             key-positions = <50 47>;
@@ -198,6 +198,11 @@
         combo_undo {
             bindings = <&kp LG(Z)>;
             key-positions = <50 48>;
+        };
+
+        combo_redo {
+            bindings = <&kp LS(LG(Z))>;
+            key-positions = <47 49>;
         };
     };
 
