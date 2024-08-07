@@ -210,12 +210,12 @@
 
         combo_select_all {
             bindings = <&kp LG(A)>;
-            key-positions = <50 47>;
+            key-positions = <47 50>;
         };
 
         combo_undo {
             bindings = <&kp LG(Z)>;
-            key-positions = <50 48>;
+            key-positions = <48 50>;
         };
 
         combo_redo {
