@@ -195,32 +195,32 @@
 
         combo_copy {
             bindings = <&kp LG(C)>;
-            key-positions = <48 49>;
+            key-positions = <24 25>;
         };
 
         combo_paste {
             bindings = <&kp LG(V)>;
-            key-positions = <49 50>;
+            key-positions = <26 25>;
         };
 
         combo_cut {
             bindings = <&kp LG(X)>;
-            key-positions = <47 48>;
+            key-positions = <23 24>;
         };
 
         combo_select_all {
             bindings = <&kp LG(A)>;
-            key-positions = <47 50>;
+            key-positions = <26 23>;
         };
 
         combo_undo {
             bindings = <&kp LG(Z)>;
-            key-positions = <48 50>;
+            key-positions = <26 24>;
         };
 
         combo_redo {
             bindings = <&kp LS(LG(Z))>;
-            key-positions = <47 49>;
+            key-positions = <25 23>;
         };
     };
 
