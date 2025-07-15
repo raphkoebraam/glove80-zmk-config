@@ -193,6 +193,8 @@
             key-positions = <38 41>;
         };
 
+        /*
+
         combo_copy {
             bindings = <&kp LG(C)>;
             key-positions = <24 25>;
@@ -222,6 +224,8 @@
             bindings = <&kp LS(LG(Z))>;
             key-positions = <25 23>;
         };
+
+        */
     };
 
     macros {
