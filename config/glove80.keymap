@@ -193,6 +193,11 @@
             key-positions = <38 41>;
         };
 
+        combo_caps_lock {
+            bindings = <&kp CAPSLOCK>;
+            key-positions = <50 59>;
+        };
+
         /*
 
         combo_copy {
