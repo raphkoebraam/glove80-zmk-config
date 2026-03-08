@@ -8,7 +8,10 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 #define HYPER LC(LS(LG(LALT)))
 
@@ -19,6 +22,66 @@
 #define MAGIC 2
 #define FACTORY_TEST 3
 #define NAV_SYMBOL 4
+#define MOUSE 5
+#define MOUSE_LAYER_SLOW 6
+#define MOUSE_LAYER_FAST 7
+#define MOUSE_LAYER_WARP 8
+
+&mmv {
+    acceleration-exponent = <1>;
+    time-to-max-speed-ms = <300>;
+    delay-ms = <0>;
+};
+
+&msc {
+    acceleration-exponent = <0>;
+    time-to-max-speed-ms = <300>;
+    delay-ms = <0>;
+};
+
+// Mouse movement speed scaling per layer
+
+&mmv_input_listener {
+    slow {
+        layers = <MOUSE_LAYER_SLOW>;
+        input-processors = <&zip_xy_scaler 1 12>;
+    };
+    fast {
+        layers = <MOUSE_LAYER_FAST>;
+        input-processors = <&zip_xy_scaler 4 1>;
+    };
+    warp {
+        layers = <MOUSE_LAYER_WARP>;
+        input-processors = <&zip_xy_scaler 12 1>;
+    };
+};
+
+/ {
+    input_processors {
+        zip_scroll_scaler: zip_scroll_scaler {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
+            track-remainders;
+        };
+    };
+};
+
+&msc_input_listener {
+    slow {
+        layers = <MOUSE_LAYER_SLOW>;
+        input-processors = <&zip_scroll_scaler 1 9>;
+    };
+    fast {
+        layers = <MOUSE_LAYER_FAST>;
+        input-processors = <&zip_scroll_scaler 3 1>;
+    };
+    warp {
+        layers = <MOUSE_LAYER_WARP>;
+        input-processors = <&zip_scroll_scaler 9 1>;
+    };
+};
 
 / {
     behaviors {
@@ -262,7 +325,7 @@
 &kp LS(N2)            &kp Q                 &kp W            &kp E             &kp R              &kp T                                                                                                                          &kp Y                         &kp U               &kp I                 &kp O              &kp P                   &kp BSLH
 &kp ESC               &kp A                 &kp S            &kp D             &hml LS(LA(LC(LEFT_GUI))) F  &kp G                                                                                                         &kp H                         &hmr LS(LA(LC(LGUI))) J  &kp K            &kp L              &kp SEMICOLON           &kp SQT
 &kp LEFT_SHIFT        &hml LEFT_CONTROL Z   &hml LEFT_ALT X  &hml LEFT_GUI C   &hml LEFT_SHIFT V  &kp B                        &kp GRAVE     &key_lh_t2  &hml LEFT_GUI SPACE  &hmr RIGHT_GUI LS(N4)  &kp EQUAL      &key_rh_t2   &kp N                         &hmr RIGHT_SHIFT M  &hmr RIGHT_GUI COMMA  &hmr LEFT_ALT DOT  &hmr LEFT_CONTROL FSLH  &kp RIGHT_SHIFT
-&magic MAGIC 0        &kp END               &kp PAGE_UP      &kp PAGE_DOWN     &kp HOME                                        &lt 1 RETURN  &kp TAB     &kp BACKSPACE        &kp RETURN             &kp BACKSPACE  &lt NAV_SYMBOL SPACE                                &kp LEFT            &kp DOWN              &kp UP             &kp RIGHT               &magic 2 0
+&magic MAGIC 0        &kp END               &kp PAGE_UP      &kp PAGE_DOWN     &kp HOME                                        &lt 1 RETURN  &kp TAB     &kp BACKSPACE        &kp RETURN             &lt MOUSE BACKSPACE  &lt NAV_SYMBOL SPACE                                &kp LEFT            &kp DOWN              &kp UP             &kp RIGHT               &magic 2 0
             >;
         };
 
@@ -307,6 +370,50 @@
 &kp POUND        &kp CARET         &kp EQUAL              &kp UNDERSCORE         &kp DOLLAR         &kp STAR                                                                                                                       &kp COMMA  &kp BACKSPACE      &kp TAB           &kp SPACE     &kp ENTER         &trans
 &kp TILDE        &kp LESS_THAN     &kp PIPE               &kp MINUS              &kp GREATER_THAN   &kp SLASH     &kp BACKSLASH  &kp DOT    &triple_backtick      &trans  &trans  &trans                                        &kp SEMI   &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp GRAVE     &kp BACKSLASH     &trans
 &dot_dot         &kp AMPS          &kp SINGLE_QUOTE       &kp DOUBLE_QUOTES      &kp PLUS                         &kp PERCENT  &kp COLON      &kp AT                &trans  &trans  &trans                                                  &kp LEFT_SHIFT     &kp LEFT_GUI      &kp LEFT_ALT  &kp LEFT_CONTROL  &trans
+            >;
+        };
+
+        mouse {
+            bindings = <
+&none  &none           &none                  &none           &none                                                                                                                                                                &none      &none           &none           &none           &none
+&none  &none           &none                  &none           &none            &none                                                                                                                        &none      &none           &none           &none           &none                  &none
+&none  &none           &msc SCRL_LEFT         &mmv MOVE_UP    &msc SCRL_RIGHT  &none                                                                                                                        &msc SCRL_LEFT  &mkp LCLK       &mkp MCLK       &mkp RCLK       &msc SCRL_RIGHT        &none
+&none  &msc SCRL_UP    &mmv MOVE_LEFT         &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP                                                                                                                 &msc SCRL_UP    &tog MOUSE_LAYER_FAST  &tog MOUSE_LAYER_WARP  &tog MOUSE_LAYER_SLOW  &kp K_APP      &mkp LCLK
+&none  &msc SCRL_DOWN  &tog MOUSE_LAYER_SLOW  &tog MOUSE_LAYER_WARP  &tog MOUSE_LAYER_FAST  &msc SCRL_DOWN  &mkp MCLK  &none  &kp LG(X)    &kp LG(C)  &none  &none  &msc SCRL_DOWN  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &mkp LCLK
+&none  &none           &kp LG(X)             &kp LG(C)       &kp LG(V)                      &mkp LCLK  &mkp RCLK  &none        &none  &tog MOUSE  &kp LG(V)                  &kp LEFT_SHIFT  &kp LEFT_GUI    &kp LEFT_ALT    &kp LEFT_CONTROL       &none
+            >;
+        };
+
+        mouse_slow {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                                                                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        mouse_fast {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                                                                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        mouse_warp {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                                                                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
