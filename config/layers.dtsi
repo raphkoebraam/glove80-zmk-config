@@ -53,6 +53,10 @@
 #define LAYER_RightPinky  15
 //
 #define LAYER_SunakuNumber 16
+//
+// Mouse and utility layers (after bilateral):
+#define LAYER_Mouse       17
+#define LAYER_Factory     21
 
 // Finger mod assignments (macOS: CAGS)
 #define LEFT_PINKY_MOD  LCTL

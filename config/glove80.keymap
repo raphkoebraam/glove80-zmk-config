@@ -15,9 +15,9 @@
 #include <dt-bindings/zmk/rgb.h>
 #include "layers.dtsi"
 
-#define MOUSE_LAYER_SLOW 6
-#define MOUSE_LAYER_FAST 7
-#define MOUSE_LAYER_WARP 8
+#define MOUSE_LAYER_SLOW 18
+#define MOUSE_LAYER_FAST 19
+#define MOUSE_LAYER_WARP 20
 
 &mmv {
     acceleration-exponent = <1>;
@@ -1135,7 +1135,7 @@
 &kp LS(N2)  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSLH
 &kp ESCAPE  &kp A  &kp S  &kp D  &left_index LS(LA(LC(LGUI))) F  &kp G  &kp H  &right_index LS(LA(LC(LGUI))) J  &kp K  &kp L  &kp SEMI  &kp SQT
 &kp LSHFT  &HRM_LEFT_PINKY(Z)  &HRM_LEFT_RINGY(X)  &HRM_LEFT_MIDDY(C)  &HRM_LEFT_INDEX(V)  &kp B  &kp GRAVE  &key_lh_t2  &thumb LAYER_Function ESC  &thumb LAYER_Lower DELETE  &kp EQUAL  &key_rh_t2  &kp N  &HRM_RIGHT_INDEX(M)  &HRM_RIGHT_MIDDY(COMMA)  &HRM_RIGHT_RINGY(DOT)  &HRM_RIGHT_PINKY(FSLH)  &kp RSHFT
-&mo LAYER_Mod  &kp END  &kp PAGE_UP  &kp PAGE_DOWN  &kp HOME  &thumb LAYER_Keypad RETURN  &thumb LAYER_Cursor TAB  &kp BACKSPACE  &thumb LAYER_System RETURN  &kp BACKSPACE  &thumb LAYER_Symbol SPACE  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &mo LAYER_Mod
+&magic LAYER_Mod 0  &kp END  &kp PAGE_UP  &kp PAGE_DOWN  &kp HOME  &thumb LAYER_Keypad RETURN  &thumb LAYER_Cursor TAB  &kp BACKSPACE  &thumb LAYER_System RETURN  &kp BACKSPACE  &thumb LAYER_Symbol SPACE  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &magic LAYER_Mod 0
             >;
         };
 
@@ -1157,18 +1157,18 @@
 &trans  &kp KP_MINUS  &kp KP_NUMBER_9  &kp KP_N8  &kp KP_N7  &kp LPAR  &kp LPAR  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp KP_MINUS  &trans
 &trans  &kp KP_PLUS  &kp KP_N6  &kp KP_N5  &kp KP_N4  &kp RPAR  &kp RPAR  &kp KP_N4  &kp KP_N5  &kp KP_N6  &kp KP_PLUS  &trans
 &trans  &kp KP_ENTER  &kp KP_N3  &kp KP_N2  &kp KP_N1  &kp PRCNT  &trans  &trans  &trans  &trans  &trans  &trans  &kp PRCNT  &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp KP_ENTER  &trans
-&mo LAYER_Mod  &kp COLON  &kp KP_DOT  &kp KP_N0  &kp COMMA  &kp SPACE  &kp BACKSPACE  &trans  &trans  &kp BACKSPACE  &kp SPACE  &kp COMMA  &kp KP_N0  &kp KP_DOT  &kp COLON  &mo LAYER_Mod
+&magic LAYER_Mod 0  &kp COLON  &kp KP_DOT  &kp KP_N0  &kp COMMA  &kp SPACE  &kp BACKSPACE  &trans  &trans  &kp BACKSPACE  &kp SPACE  &kp COMMA  &kp KP_N0  &kp KP_DOT  &kp COLON  &magic LAYER_Mod 0
             >;
         };
 
-        mod {
+        magic_layer {
             bindings = <
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-&none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &bt BT_CLR  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &rgb_ug RGB_TOG  &none  &none  &none  &none  &none
+&bt BT_CLR   &none            &none            &none            &none                                                                                     &none  &none  &none  &none  &bt BT_CLR_ALL
+&none        &none            &none            &none            &none            &none                                                             &none  &none  &none  &none  &none  &none
+&none        &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG                                                   &none  &none  &none  &none  &none  &none
+&bootloader  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF                                                   &none  &none  &none  &none  &none  &bootloader
+&sys_reset   &none            &none            &none            &none            &none            &bt_2  &bt_3  &none         &none  &none  &none  &none  &none  &none  &none  &none  &sys_reset
+&none        &none            &none            &none            &none                             &bt_0  &bt_1  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &to LAYER_Factory
             >;
         };
 
@@ -1213,50 +1213,6 @@
 &none  &sk LEFT_PINKY_MOD  &sk LEFT_RINGY_MOD  &sk LEFT_MIDDY_MOD  &sk LEFT_INDEX_MOD  &kp KP_MINUS  &kp KP_SLASH  &sk RIGHT_INDEX_MOD  &sk RIGHT_MIDDY_MOD  &sk RIGHT_RINGY_MOD  &sk RIGHT_PINKY_MOD  &none
 &none  &kp KP_LPAR  &kp KP_COMMA  &kp KP_DOT  &kp KP_RPAR  &kp KP_PLUS  &none  &none  &tog LAYER_Function  &kp RALT  &kp RALT  &none  &kp KP_MULTIPLY  &kp KP_NUM  &kp KP_CLEAR  &kp KP_EQUAL  &kp KP_ENTER  &none
 &none  &none  &none  &none  &none  &tog LAYER_Cursor  &tog LAYER_Keypad  &none  &none  &none  &tog LAYER_Symbol  &none  &none  &none  &none  &none
-            >;
-        };
-
-        mouse {
-            bindings = <
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &msc SCRL_LEFT  &mmv MOVE_UP  &msc SCRL_RIGHT  &none  &msc SCRL_LEFT  &mkp LCLK  &mkp MCLK  &mkp RCLK  &msc SCRL_RIGHT  &none
-&none  &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_DOWN  &msc SCRL_DOWN  &tog 7  &tog 8  &tog MOUSE_LAYER_SLOW  &kp K_APP  &mkp LCLK
-&none  &msc SCRL_UP  &tog MOUSE_LAYER_SLOW  &tog 8  &tog 7  &msc SCRL_UP  &mkp MCLK  &kp K_APP  &mkp LCLK  &none  &kp LG(X)  &kp LG(C)  &msc SCRL_UP  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &mkp LCLK
-&none  &none  &kp LG(X)  &kp LG(C)  &kp LG(V)  &mkp LCLK  &mkp RCLK  &mkp LCLK  &none  &tog 5  &kp LG(V)  &kp LEFT_SHIFT  &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &none
-            >;
-        };
-
-        mouse_slow {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        mouse_fast {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        mouse_warp {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
@@ -1356,6 +1312,50 @@
 &sk LSHFT  &kp LEFT_PINKY_MOD  &kp LEFT_RINGY_MOD  &kp LEFT_MIDDY_MOD  &kp LEFT_INDEX_MOD  &kp X  &kp K  &kp N4  &kp N5  &kp N6  &kp MINUS  &kp LS(EQUAL)
 &kp E  &select_all  &select_line  &select_word  &kp _FIND  &kp F  &none  &none  &none  &kp COMMA  &kp LS(COMMA)  &kp EQUAL  &kp J  &kp N1  &kp N2  &kp N3  &kp FSLH  &kp LS(N8)
 &kp LS(MINUS)  &kp _UNDO  &kp _REDO  &kp _FIND_PREV  &kp _FIND_NEXT  &none  &tog LAYER_SunakuNumber  &none  &kp LS(DOT)  &kp DOT  &kp N0  &kp LS(N9)  &kp LBKT  &kp RBKT  &kp LS(N0)  &kp LS(N2)
+            >;
+        };
+
+        mouse {
+            bindings = <
+&none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &msc SCRL_LEFT  &mmv MOVE_UP  &msc SCRL_RIGHT  &none  &msc SCRL_LEFT  &mkp LCLK  &mkp MCLK  &mkp RCLK  &msc SCRL_RIGHT  &none
+&none  &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_DOWN  &msc SCRL_DOWN  &tog 7  &tog 8  &tog MOUSE_LAYER_SLOW  &kp K_APP  &mkp LCLK
+&none  &msc SCRL_UP  &tog MOUSE_LAYER_SLOW  &tog 8  &tog 7  &msc SCRL_UP  &mkp MCLK  &kp K_APP  &mkp LCLK  &none  &kp LG(X)  &kp LG(C)  &msc SCRL_UP  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &mkp LCLK
+&none  &none  &kp LG(X)  &kp LG(C)  &kp LG(V)  &mkp LCLK  &mkp RCLK  &mkp LCLK  &none  &tog 5  &kp LG(V)  &kp LEFT_SHIFT  &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &none
+            >;
+        };
+
+        mouse_slow {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        mouse_fast {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        mouse_warp {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
